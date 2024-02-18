@@ -1,5 +1,4 @@
-
-function getComputerChoice() {
+function getComputerChoice() {   
     let x = parseInt(Math.random() * 3);
     let y = undefined;
     if (x===0) {
@@ -13,16 +12,16 @@ function getComputerChoice() {
     }
     return y;
 }
-
+function result(num){
+    if (num === 0) {return "lose"}
+    if (num === 1) {return "win"}
+    if (num === 2) {return "are draw"}
+}
+const roundChoice1 = document.querySelector("p.roundchoice1");
 function playRound() {
-    const playerSelection = prompt("Write your choice");
+    const playerSelection = roundChoice1.textContent;
     const computerSelection = getComputerChoice();
     x = (playerSelection.toLowerCase()).trim();
-    function result(num){
-        if (num === 0) {return "lose"}
-        if (num === 1) {return "win"}
-        if (num === 2) {return "draw"}
-    }
     function selection(){
         if (x === computerSelection) {
         return 2;
@@ -46,27 +45,66 @@ function playRound() {
                 return 0;
     }}
 
-    console.log(result(selection()));
     return selection();
      }
-
-     function playGame() {
-        let playerscor = 0;
-        let computerscor = 0;
-        for (i=1; i<99; i++) {
-            let round = playRound()
-            if (round===1) {playerscor++}
-            if (round===0) {computerscor++}
-            if (playerscor > 2) {
-                i=100;
-                console.log("You have won the game");
-                return 1;
+let playerscor = 0;
+let computerscor = 0;
+    function playGame() {
+            if (playRound()===1) {playerscor++}
+            if (playRound()===0) {computerscor++}
+            if (playerscor > 4) {
+                endresult.textContent += "You have won the game" ;
             }
-            if (computerscor > 2) {
-                i=100;
-               console.log("You have lost the game");
-               return 2;
+            if (computerscor > 4) {
+               endresult.textContent += "You have lost the game";
             }
         }
-    }
-     playGame();
+
+const playerChoicePaper = document.querySelector("#paper");
+const playerChoiceScissors = document.querySelector("#scissors");
+const playerChoiceRock = document.querySelector("#rock");
+const roundchoice = document.querySelector("p.roundchoice");
+const roundChoiceText = document.querySelector("p.roundchoice");
+const endresult = document.querySelector("div.endresult");
+const buttons = document.querySelectorAll("div.buttons, button");
+const resetbut = document.querySelector("#reset");
+const roundresults = document.querySelector("div.roundresults");
+
+resetbut.addEventListener("click", () => {
+    playerscor = 0;
+    computerscor = 0;
+    roundresults.textContent = "";
+    endresult.textContent ="";
+});
+
+playerChoicePaper.addEventListener("click", () => 
+{roundChoice1.textContent = "Paper";
+roundchoice.textContent = "You have chosen paper";
+const content = document.createElement("div");
+    content.classList.add("content");
+    content.textContent = `You ${result(playRound())} this round !`;
+    roundresults.appendChild(content);
+    playGame();
+});
+
+playerChoiceRock.addEventListener("click", () =>
+{roundChoice1.textContent = "Rock";
+roundchoice.textContent = "You have chosen rock";
+const content = document.createElement("div");
+    content.classList.add("content");
+    content.textContent = `You ${result(playRound())} this round !`;
+    roundresults.appendChild(content);
+    playGame();
+});
+
+playerChoiceScissors.addEventListener("click", () => 
+{roundChoice1.textContent = "Scissors";
+roundchoice.textContent = "You have chosen scissors";
+const content = document.createElement("div");
+    content.classList.add("content");
+    content.textContent = `You ${result(playRound())} this round !`;
+    roundresults.appendChild(content);
+    playGame();
+});
+
+
