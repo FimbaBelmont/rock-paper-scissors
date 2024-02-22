@@ -1,27 +1,26 @@
-function getComputerChoice() {   
-    let x = parseInt(Math.random() * 3);
-    let y = undefined;
-    if (x===0) {
-        y = "rock"
+    function getComputerChoice() {   
+        let x = parseInt(Math.random() * 3);
+        let y = undefined;
+        if (x===0) {
+            y = "rock"
+        }
+        else if (x===1) {
+            y = "paper"
+        }
+        else {
+            y="scissors"
+        }
+        return y;
     }
-    else if (x===1) {
-        y = "paper"
-    }
-    else {
-        y="scissors"
-    }
-    return y;
-}
-function result(num){
-    if (num === 0) {return "lose"}
-    if (num === 1) {return "win"}
-    if (num === 2) {return "are draw"}
-}
+
 const roundChoice1 = document.querySelector("p.roundchoice1");
+
 function playRound() {
     const playerSelection = roundChoice1.textContent;
-    const computerSelection = getComputerChoice();
     x = (playerSelection.toLowerCase()).trim();
+    const computerSelection = getComputerChoice();
+    const compChoice = document.querySelector("p.computerChoice");
+    compChoice.textContent = `Computer have chosen ${computerSelection}`
     function selection(){
         if (x === computerSelection) {
         return 2;
@@ -47,11 +46,11 @@ function playRound() {
 
     return selection();
      }
+
+
 let playerscor = 0;
 let computerscor = 0;
     function playGame() {
-            if (playRound()===1) {playerscor++}
-            if (playRound()===0) {computerscor++}
             if (playerscor > 4) {
                 endresult.textContent += "You have won the game" ;
             }
@@ -70,41 +69,59 @@ const buttons = document.querySelectorAll("div.buttons, button");
 const resetbut = document.querySelector("#reset");
 const roundresults = document.querySelector("div.roundresults");
 
-resetbut.addEventListener("click", () => {
-    playerscor = 0;
-    computerscor = 0;
-    roundresults.textContent = "";
-    endresult.textContent ="";
-});
 
-playerChoicePaper.addEventListener("click", () => 
-{roundChoice1.textContent = "Paper";
-roundchoice.textContent = "You have chosen paper";
-const content = document.createElement("div");
+    resetbut.addEventListener("click", () => {
+        playerscor = 0;
+        computerscor = 0;
+        roundresults.textContent = "";
+        endresult.textContent ="";
+    });
+
+    playerChoicePaper.addEventListener("click", () => 
+    {roundChoice1.textContent = "Paper";
+    roundchoice.textContent = "You have chosen paper";
+    const content = document.createElement("div");
     content.classList.add("content");
-    content.textContent = `You ${result(playRound())} this round !`;
+    let roundresult = playRound();
+    let result1 = result(roundresult);
+    content.textContent = `You ${result1} this round !`;
     roundresults.appendChild(content);
-    playGame();
-});
+    if (roundresult===1) {playerscor++}
+    if (roundresult===0) {computerscor++}
+        playGame();
+    });
 
-playerChoiceRock.addEventListener("click", () =>
-{roundChoice1.textContent = "Rock";
-roundchoice.textContent = "You have chosen rock";
-const content = document.createElement("div");
+    playerChoiceRock.addEventListener("click", () =>
+    {roundChoice1.textContent = "Rock";
+    roundchoice.textContent = "You have chosen rock";
+    const content = document.createElement("div");
+        content.classList.add("content");
+        let roundresult = playRound();
+        let result1 = result(roundresult);
+        content.textContent = `You ${result1} this round !`;
+        roundresults.appendChild(content);
+        if (roundresult===1) {playerscor++}
+        if (roundresult===0) {computerscor++}
+        playGame();
+    });
+
+    playerChoiceScissors.addEventListener("click", () => 
+    {roundChoice1.textContent = "Scissors";
+    roundchoice.textContent = "You have chosen scissors";
+    const content = document.createElement("div");
     content.classList.add("content");
-    content.textContent = `You ${result(playRound())} this round !`;
+    let roundresult = playRound();
+    let result1 = result(roundresult);
+    content.textContent = `You ${result1} this round !`;
     roundresults.appendChild(content);
-    playGame();
-});
+    if (roundresult===1) {playerscor++}
+    if (roundresult===0) {computerscor++}
+        playGame();
+    });
 
-playerChoiceScissors.addEventListener("click", () => 
-{roundChoice1.textContent = "Scissors";
-roundchoice.textContent = "You have chosen scissors";
-const content = document.createElement("div");
-    content.classList.add("content");
-    content.textContent = `You ${result(playRound())} this round !`;
-    roundresults.appendChild(content);
-    playGame();
-});
-
+    function result(num){
+        if (num === 0) {return "lose"}
+        if (num === 1) {return "win"}
+        if (num === 2) {return "are draw"}
+    }
 
