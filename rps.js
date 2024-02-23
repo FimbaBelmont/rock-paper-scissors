@@ -20,7 +20,7 @@ function playRound() {
     x = (playerSelection.toLowerCase()).trim();
     const computerSelection = getComputerChoice();
     const compChoice = document.querySelector("p.computerChoice");
-    compChoice.textContent = `Computer have chosen ${computerSelection}`
+    compChoice.textContent = `Computer have chosen ${computerSelection}.`
     function selection(){
         if (x === computerSelection) {
         return 2;
@@ -51,11 +51,14 @@ function playRound() {
 let playerscor = 0;
 let computerscor = 0;
     function playGame() {
-            if (playerscor > 4) {
-                endresult.textContent += "You have won the game" ;
+            if (playerscor === 5 ) {
+                endresult.textContent += "You have won the game !" ;
             }
-            if (computerscor > 4) {
-               endresult.textContent += "You have lost the game";
+            if (computerscor === 5) {
+               endresult.textContent += "You have lost the game !";
+            }
+            if (playerscor > 5 || computerscor > 5) {
+                endresult.textContent += "\nPlease reset the game if you want to play again."
             }
         }
 
@@ -93,7 +96,7 @@ const roundresults = document.querySelector("div.roundresults");
 
     playerChoiceRock.addEventListener("click", () =>
     {roundChoice1.textContent = "Rock";
-    roundchoice.textContent = "You have chosen rock";
+    roundchoice.textContent = "You have chosen rock.";
     const content = document.createElement("div");
         content.classList.add("content");
         let roundresult = playRound();
@@ -107,7 +110,7 @@ const roundresults = document.querySelector("div.roundresults");
 
     playerChoiceScissors.addEventListener("click", () => 
     {roundChoice1.textContent = "Scissors";
-    roundchoice.textContent = "You have chosen scissors";
+    roundchoice.textContent = "You have chosen scissors.";
     const content = document.createElement("div");
     content.classList.add("content");
     let roundresult = playRound();
